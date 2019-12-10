@@ -1,0 +1,44 @@
+{% include 'partials/header_login.html' %}
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-4">Browse Musicians and Start Collaborating.</h1>
+        <p class="lead">Explore a large community of musicians and create amazing music.</p>
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="alert alert-danger" role="alert">
+        {{ messages[0] }}
+      </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="container main-browse">
+      <div class="row" style="display: flex; flex-wrap: wrap;">
+        {% for profile in profiles %}
+        <div class="col-md-4 col-sm-6 text-center">
+          <div class="card">
+            <img src="{{ profile.picture }}" class="card-img-top" alt="...">
+            <a href="/profile/{{ profile.id }}" class="cardButton">
+                {{ profile.first_name }} {{ profile.last_name }}
+            </a>
+            <div class="card-body">
+              <p class="card-text">
+                <i class="far fa-play-circle"></i>
+                {{ profile.instruments }}
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  <i class="fas fa-music"></i> {{ profile.genre }}
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+{% include 'partials/footer.html' %}

@@ -1,0 +1,90 @@
+{% include 'partials/header_login.html' %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    {{ moment.include_moment() }}
+
+    <div class="container profileView">
+      {% if current_user.profile.id == profile.id %}
+      <a href="{{ url_for('editProfile', uid=profile.id) }}" class="btn loginButton editProfile"><i class="fas fa-user-edit"></i> Edit Profile</a>
+      {% endif %}
+      <div class="row">
+        <div class="card profileMain">
+          <div class="row no-gutters">
+            <div class="col-md-5">
+              <img src="{{ profile.picture }}" class="card-img profilePhoto" alt="...">
+            </div>
+            <div class="col-md-7">
+              <h1 class="profileName">{{ profile.first_name }} {{ profile.last_name }}</h1>
+              <div class="card-body">
+                <h5 class="card-text"><i class="far fa-play-circle"></i> Instruments:</h3>
+                <div class="profileBody">
+                  {% for instrument in instruments %}
+                  <span class="profileButton">{{ instrument }}</span>
+                  {% endfor %}
+                </div>
+                <h5 class="card-text"><i class="fas fa-music"></i> Genres:</h3>
+                <div class="profileBody"> 
+                  {% for genre in genres %}
+                  <span class="profileButton">{{ genre }}</span>
+                  {% endfor %}
+                </div>
+                <p class="card-text dob"><small class="text-muted"><i class="fas fa-birthday-cake"></i> {{ profile.dob }}</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <h5 class="profileName">About</h5>
+            <div class="card-body">
+              <p class="card-text">{{ profile.about }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card">
+            <h5 class="profileName">Post a Message</h5>
+            <div class="card-body">
+              <form action=" {{ url_for('message' , uid=profile.id) }}" method="POST">
+                <div class="form-group">
+                  <textarea maxlength="120" name="message" class="form-control" rows="3" placeholder="Write something to {{ profile.first_name }}..." required=""></textarea>
+                </div>
+                <button type="submit" class="btn loginButton float-right">Post</button>
+              </form>
+            </div>
+          {% for each in profile.message|reverse %}
+          <div class="card profileMain messageCardMain">
+            <div class="row no-gutters">
+              <div class="col-1">
+                <img src="{{ author[profile.message|length - loop.index].profile.picture }}" class="card-img" alt="..." id="messageImage">
+              </div>
+              <div class="col-11">
+                <div class="card-body messageCard">
+                  <a href="{{ url_for('profile', uid=author[profile.message|length - loop.index].profile.id) }}" class="messageProfile">
+                    {{ author[profile.message|length - loop.index].profile.first_name }} 
+                    {{ author[profile.message|length - loop.index].profile.last_name }} 
+                  </a>
+                  <span class="float-right text-muted">
+                      <small><i class="fas fa-clock"></i> {{ moment(each.timestamp).fromNow() }}</small>
+                  </span>
+                  {% if current_user.profile.id == profile.id or current_user.id == author[profile.message|length - loop.index].id %}
+                  <form action="{{ url_for('deleteMessage', uid=each.id) }}" method="POST" style="display: inline;" >
+                    <button type="submit" class="btn btn-link float-right text-danger" id="deleteButton" onclick="return confirm('Are you sure you want to delete this comment?');">
+                      <small><i class="fas fa-times"></i> Delete</small>
+                    </button>
+                  </form>
+                  {% endif %}
+                  <p class="card-text message">{{ each.body }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% include 'partials/footer.html' %}

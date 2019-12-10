@@ -1,0 +1,126 @@
+{% include 'partials/header_login.html' %}
+
+    <div class="container createProfile">
+      <h2>Edit Profile</h2>
+      <form action=" {{ url_for('profile' , uid=profile.id) }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="First Name" name="first_name" value="{{ profile.first_name }}" required>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Last Name" name="last_name" value="{{ profile.last_name }}" required>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-light createAlert" role="alert">
+          Change profile picture
+        </div>
+        <div class="form-group">
+          <input type="file" class="form-control-file" name="picture" accept="image/jpeg">
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col">
+              <select class="form-control" name="month">
+                <option value="January" {% if dob[0] == 'January' %} selected="selected" {% endif %}>January</option>
+                <option value="February" {% if dob[0] == 'February' %} selected="selected" {% endif %}>February</option>
+                <option value="March" {% if dob[0] == 'March' %} selected="selected" {% endif %}>March</option>
+                <option value="April" {% if dob[0] == 'April' %} selected="selected" {% endif %}>April</option>
+                <option value="May" {% if dob[0] == 'May' %} selected="selected" {% endif %}>May</option>
+                <option value="June" {% if dob[0] == 'June' %} selected="selected" {% endif %}>June</option>
+                <option value="July" {% if dob[0] == 'July' %} selected="selected" {% endif %}>July</option>
+                <option value="August" {% if dob[0] == 'August' %} selected="selected" {% endif %}>August</option>
+                <option value="September" {% if dob[0] == 'September' %} selected="selected" {% endif %}>September</option>
+                <option value="October" {% if dob[0] == 'October' %} selected="selected" {% endif %}>October</option>
+                <option value="November" {% if dob[0] == 'November' %} selected="selected" {% endif %}>November</option>
+                <option value="December" {% if dob[0] == 'December' %} selected="selected" {% endif %}>December</option>
+              </select>
+            </div>
+            <div class="col">
+              <input type="number" class="form-control" placeholder="1" name="day" min="1" max="31" value="{{ dob[1] }}" required>
+            </div>
+            <div class="col">
+              <input type="number" class="form-control" placeholder="1900" name="year" min="1900" max="2019" value="{{ dob[2] }}" required>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-light createAlert" role="alert">
+          What instruments do you play? (Select all that apply)
+        </div>
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="instrumentCheckbox1" value="Guitar" name="instruments" {% if 'Guitar' in instruments %} checked {% endif %}>
+            <label class="form-check-label" for="instrumentCheckbox1">Guitar</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="instrumentCheckbox2" value="Bass" name="instruments" {% if 'Bass' in instruments %} checked {% endif %}>
+            <label class="form-check-label" for="instrumentCheckbox2">Bass</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="instrumentCheckbox3" value="Drums" name="instruments" {% if 'Drums' in instruments %} checked {% endif %}>
+            <label class="form-check-label" for="instrumentCheckbox3">Drums</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="instrumentCheckbox4" value="Piano" name="instruments" {% if 'Piano' in instruments %} checked {% endif %}>
+            <label class="form-check-label" for="instrumentCheckbox4">Piano</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="instrumentCheckbox5" value="Keyboard" name="instruments" {% if 'Keyboard' in instruments %} checked {% endif %}>
+            <label class="form-check-label" for="instrumentCheckbox5">Keyboard</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="instrumentCheckbox6" value="Vocals" name="instruments" {% if 'Vocals' in instruments %} checked {% endif %}>
+            <label class="form-check-label" for="instrumentCheckbox6">Vocals</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="instrumentCheckbox7" value="Production" name="instruments" {% if 'Production' in instruments %} checked {% endif %}>
+            <label class="form-check-label" for="instrumentCheckbox7">Production</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="instrumentCheckbox8" value="Other" name="instruments" {% if 'Other' in instruments %} checked {% endif %}>
+            <label class="form-check-label" for="instrumentCheckbox8">Other</label>
+          </div>
+        </div>
+        <div class="alert alert-light createAlert" role="alert">
+          What genres are you interested in? (Select all that apply)
+        </div>
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="genreCheckbox1" value="Rock" name="genres" {% if 'Rock' in genres %} checked {% endif %}>
+            <label class="form-check-label" for="genreCheckbox1">Rock</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="genreCheckbox2" value="Pop" name="genres" {% if 'Pop' in genres %} checked {% endif %}>
+            <label class="form-check-label" for="genreCheckbox2">Pop</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="genreCheckbox3" value="Hip-Hop" name="genres" {% if 'Hip-Hop' in genres %} checked {% endif %}>
+            <label class="form-check-label" for="genreCheckbox3">Hip-Hop</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="genreCheckbox4" value="Electronic" name="genres" {% if 'Electronic' in genres %} checked {% endif %}>
+            <label class="form-check-label" for="genreCheckbox4">Electronic</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="genreCheckbox5" value="Metal" name="genres" {% if 'Metal' in genres %} checked {% endif %}>
+            <label class="form-check-label" for="genreCheckbox5">Metal</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="genreCheckbox6" value="Jazz" name="genres" {% if 'Jazz' in genres %} checked {% endif %}>
+            <label class="form-check-label" for="genreCheckbox6">Jazz</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="genreCheckbox7" value="Other" name="genres" {% if 'Other' in genres %} checked {% endif %}>
+            <label class="form-check-label" for="genreCheckbox7">Other</label>
+          </div>
+        </div>
+        <div class="form-group">
+            <textarea maxlength="120" class="form-control" rows="3" placeholder="Write something to about yourself..." name="about" required>{{ profile.about }}
+            </textarea>
+          </div>
+        <button type="submit" class="btn signUpButton">Submit</button>
+      </form>
+    </div>
+
+{% include 'partials/footer.html' %}

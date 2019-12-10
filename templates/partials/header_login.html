@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon-16x16.png">
+    <link rel="manifest" href="../static/images/site.webmanifest">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/57af440f61.js" crossorigin="anonymous"></script>
+
+    {% if title %}
+    <title>{{ title }} - Collab.</title>
+    {% else %}
+    <title>Collab.</title>
+    {% endif %}
+  </head>
+  
+  <body>
+    <nav class="navbar navbar-expand-md" id="mainNavbar">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='images/navbar_logo.png') }}" alt="logo" id="#navBarLogo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('profile', uid=current_user.profile.id) }}">Profile</a>
+            </li>
+            <li>
+              <form class="form-inline" action="{{ url_for('results') }}" method="GET">
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col" id="searchBar">
+                      <input type="seach" class="form-control" id="searchBox" placeholder="Search" name="q" required>
+                    </div>
+                    <div class="col" id="searchBarButton">
+                      <button class="btn searchButton" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+              </form>
+            </li>
+          </ul>
+          <span>
+            logged in as {{ current_user.username }}
+          </span>
+          <a class="btn loginButton" href="{{ url_for('logout') }}" role="button">Log Out</a>
+        </div>
+      </div>
+    </nav>

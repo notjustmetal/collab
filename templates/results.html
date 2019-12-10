@@ -1,0 +1,164 @@
+{% include 'partials/header_login.html' %}
+	<div class="container profileView">
+		<div class="row">
+			<div class="col-md-3">
+	      <div class="card sortCard">
+	        <h5 class="profileName" id="sortLabel">Sort</h5>
+	        <ul class="list-group">
+	        	<li class="list-group-item sortList">
+					  	<button type="button sortList" class="btn sortButton" onclick="sortAll()">
+					  		<i class="fas fa-user"></i> All
+					  	</button>
+					  </li>
+					  <li class="list-group-item sortList">
+					  	<button type="button sortList" class="btn sortButton" onclick="sortResults('profileDiv', 'instrumentDiv', 'genreDiv')">
+					  		<i class="fas fa-file-signature"></i> Name
+					  	</button>
+					  </li>
+					  <li class="list-group-item sortList">
+					  	<button type="button" class="btn sortButton" onclick="sortResults('instrumentDiv', 'profileDiv', 'genreDiv')">
+					  		<i class="fas fa-guitar"></i> Instrument
+					  	</button>
+					  </li>
+					  <li class="list-group-item sortList" id="lastList" onclick="sortResults('genreDiv', 'profileDiv', 'instrumentDiv')">
+					  	<button type="button" class="btn sortButton" >
+					  		<i class="fas fa-music"></i> Genre</button>
+					  </li>
+					</ul>
+				</div>
+      </div>
+
+      <div class="col-md-9">
+      	<h5 id="resultTitle">Displaying results for: {{ title }}</h5>
+
+      	{% if not nameResults and not instrumentResults and not genreResults %}
+      	<div id="noneDiv">
+      		<h6 id="resultTitle"><small class="text-muted">Profiles where results match name, instrument or genre.</small></h6>
+      		<p class="text-muted">Oops... there don't seem to be any results.</p>
+      	</div>
+      	{% endif %}
+      	<div id="profileDiv" {% if not nameResults %} style="display: none" {% endif %}>
+      		<h6 id="resultTitle"><small class="text-muted">Profiles where results match first or last name.</small></h6>
+      		{% if not nameResults %}
+      		<p class="text-muted">Oops... there don't seem to be any results.</p>
+      		{% endif %}
+      		{% for each in nameResults %}
+      		<div class="card profileMain messageCardMain">
+	          <div class="row no-gutters">
+	            <div class="col-2">
+	              <img src="{{ each.picture }}" class="card-img profilePhoto" alt="...">
+	            </div>
+	            <div class="col-10">
+		            <div class="card-body messageCard">
+		 							<a href="{{ url_for('profile', uid=each.id)}}" class="messageProfile">
+		                {{ each.first_name }} {{ each.last_name }}
+			            </a>
+		              <p class="card-text message">
+		              	<small class="text-muted">
+		              		<i class="far fa-play-circle"></i>
+		                	{{ each.instruments }}
+		                	<br>
+		                	<i class="fas fa-music"></i> 
+		                	{{ each.genre }}
+		              	</small>
+		              </p>
+		            </div>
+	            </div>
+	          </div>
+	        </div>
+	        {% endfor %}
+      	</div>
+
+        <div id="instrumentDiv" {% if not instrumentResults %} style="display: none" {% endif %}>
+      		<h6 id="resultTitle"><small class="text-muted">Profiles where results match instruments.</small></h6>
+      		{% if not instrumentResults %}
+      		<p class="text-muted">Oops... there don't seem to be any results.</p>
+      		{% endif %}
+      		{% for each in instrumentResults %}
+      		<div class="card profileMain messageCardMain">
+	          <div class="row no-gutters">
+	            <div class="col-2">
+	              <img src="{{ each.picture }}" class="card-img profilePhoto" alt="...">
+	            </div>
+	            <div class="col-10">
+		            <div class="card-body messageCard">
+		 							<a href="{{ url_for('profile', uid=each.id)}}" class="messageProfile">
+		                {{ each.first_name }} {{ each.last_name }}
+			            </a>
+		              <p class="card-text message">
+		              	<small class="text-muted">
+		              		<i class="far fa-play-circle"></i>
+		                	{{ each.instruments }}
+		                	<br>
+		                	<i class="fas fa-music"></i> 
+		                	{{ each.genre }}
+		              	</small>
+		              </p>
+		            </div>
+	            </div>
+	          </div>
+	        </div>
+	        {% endfor %}
+      	</div>
+
+      	<div id="genreDiv" {% if not genreResults %} style="display: none" {% endif %}>
+      		<h6 id="resultTitle"><small class="text-muted">Profiles where results match genres.</small></h6>
+ 					{% if not genreResults %}
+      		<p class="text-muted">Oops... there don't seem to be any results.</p>
+      		{% endif %}
+      		{% for each in genreResults %}
+      		<div class="card profileMain messageCardMain">
+	          <div class="row no-gutters">
+	            <div class="col-2">
+	              <img src="{{ each.picture }}" class="card-img profilePhoto" alt="...">
+	            </div>
+	            <div class="col-10">
+		            <div class="card-body messageCard">
+		 							<a href="{{ url_for('profile', uid=each.id)}}" class="messageProfile">
+		                {{ each.first_name }} {{ each.last_name }}
+			            </a>
+		              <p class="card-text message">
+		              	<small class="text-muted">
+		              		<i class="far fa-play-circle"></i>
+		                	{{ each.instruments }}
+		                	<br>
+		                	<i class="fas fa-music"></i> 
+		                	{{ each.genre }}
+		              	</small>
+		              </p>
+		            </div>
+	            </div>
+	          </div>
+	        </div>
+	        {% endfor %}
+      	</div>
+      </div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function sortResults(div1, div2, div3) {
+			var first = document.getElementById(div1);
+			var second = document.getElementById(div2);
+			var third = document.getElementById(div3);
+
+			first.style.display = "block";
+			second.style.display = "none";
+			third.style.display = "none";
+		}
+
+		function sortAll() {
+			document.getElementById("profileDiv").style.display = "block";
+			document.getElementById("instrumentDiv").style.display = "block";
+			document.getElementById("genreDiv").style.display = "block";
+			document.getElementById("noneDiv").style.display = "none";
+		}
+	</script>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>   
+  </body>
+</html>
