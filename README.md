@@ -44,6 +44,11 @@ Collab is Full-Stack social media web application, with CRUD functionality and R
 
 ## Built With
 
-* [Paper.js](http://paperjs.org/) - Vector graphics scripting framework.
-* [Howler.js](https://howlerjs.com/) - Audio library utilizing Web Audio API.
-* [Sample Focus](https://samplefocus.com) - Royalty free sounds.
+* [Flask](https://palletsprojects.com/p/flask/) - Python micro web framework.
+* [Jinja](https://www.palletsprojects.com/p/jinja/) - Full featured template engine for Python.
+* [SQLAlchemy](https://www.sqlalchemy.org/) - Open-source SQL toolkit and object-relational mapper.
+* [Werkzeug](https://www.palletsprojects.com/p/werkzeug/) - Comprehensive WSGI web application library.
+* [Moment.js](https://momentjs.com/) - Javascript library for handling dates.
+* [Flask-Mail](https://pythonhosted.org/Flask-Mail/) - Flask extension for sending email messages.
+* [Bootstrap](https://getbootstrap.com/) - Front-end HTML, CSS and JavaScript library.
+* [Photoshop](https://www.adobe.com/products/photoshopfamily.html) - Raster graphics editor.
