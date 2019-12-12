@@ -6,7 +6,7 @@
 
 ## About
 
-Collab is Full-Stack social media web application, with CRUD functionality and RESTful routing. A current working version can be found [here](https://collab-co.herokuapp.com/).
+Collab is Full-Stack social media web application, with CRUD functionality and RESTful routing. A current working version can be found [here](http://collab.wtf).
 
 <p align="center">
 <img style="display: blocks; margin: auto" src="https://github.com/notjustmetal/collab/blob/master/readme/image4.png" width=430> <img style="display: blocks; margin: auto" src="https://github.com/notjustmetal/collab/blob/master/readme/image3.png" width=430>
